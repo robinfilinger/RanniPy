@@ -2,12 +2,16 @@
 from tokenize import Special
 import discord
 import pandas as pd
+import random
+
+
 from datetime import datetime, date
 from dateutil import relativedelta
 
 #imported variables
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
+from Data.Arrays.ranniPics import ranniPics
 
 #imported functions
 from Functions.length import len
@@ -46,7 +50,7 @@ async def on_message(message):
     elif message.content == "r!length":
         await message.channel.send(len())
     elif message.content == "r!ranni":
-        await message.channel.send("💍Ranni began on 1/10/2022💍")
+        await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
     
 
     elif message.content.startswith('r!hello'):
