@@ -1,13 +1,16 @@
 #py -3 main.py        
+from tokenize import Special
 import discord
 import pandas as pd
+from datetime import datetime, date
+from dateutil import relativedelta
 
 #imported variables
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
 
 #imported functions
-
+from Functions.length import len
 
 client = discord.Client()
 
@@ -16,17 +19,17 @@ async def on_ready():
     print("The Bot is Ready.")
     #print('We have logged in as {0.user}'.format(client))
  
-# Give the location of the file
+
 
  
 df = pd.read_excel('Pets.xlsx')
-print(df)
-
+#print(df)
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
+
     if message.content == "r!help":
         await message.channel.send(embed=helpEmbed)
     
@@ -41,7 +44,7 @@ async def on_message(message):
     elif message.content == "r!anniversary":
         await message.channel.send("💍Ranni began on 1/10/2022💍")
     elif message.content == "r!length":
-        await message.channel.send("💍Ranni began on 1/10/2022💍")
+        await message.channel.send(len())
     elif message.content == "r!ranni":
         await message.channel.send("💍Ranni began on 1/10/2022💍")
     
@@ -51,6 +54,9 @@ async def on_message(message):
 
     elif message.content == "r!pets":
         await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
+
+    elif message.content == "r!test":
+        await message.channel.send(len())
 
     
 
