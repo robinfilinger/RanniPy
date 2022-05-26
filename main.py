@@ -2,9 +2,11 @@
 import discord
 import pandas as pd
 
-
+#imported variables
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
+
+#imported functions
 
 
 client = discord.Client()
@@ -25,17 +27,28 @@ print(df)
 async def on_message(message):
     if message.author == client.user:
         return
-
     if message.content == "r!help":
         await message.channel.send(embed=helpEmbed)
+    
+    elif message.content == "r!hi":
+        await message.channel.send("❤️Love you Danni❤️")
+
     elif message.content == "r!Riccardo":
         await message.channel.send(embed=RiccardoEmbed)    
     elif message.content == "r!Danni":
         await message.channel.send(embed=DanniEmbed)
+
+    elif message.content == "r!anniversary":
+        await message.channel.send("💍Ranni began on 1/10/2022💍")
+    elif message.content == "r!length":
+        await message.channel.send("💍Ranni began on 1/10/2022💍")
+    elif message.content == "r!ranni":
+        await message.channel.send("💍Ranni began on 1/10/2022💍")
+    
+
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')
-    elif message.content == "r!hi":
-        await message.channel.send('Goodbye!')
+
     elif message.content == "r!pets":
         await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
