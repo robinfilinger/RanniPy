@@ -4,6 +4,7 @@ import pandas as pd
 
 
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
+from Data.Embeds.misc import helpEmbed
 
 
 client = discord.Client()
@@ -26,7 +27,7 @@ async def on_message(message):
         return
 
     if message.content == "r!help":
-        await message.channel.send("hi")
+        await message.channel.send(embed=helpEmbed)
     elif message.content == "r!Riccardo":
         await message.channel.send(embed=RiccardoEmbed)    
     elif message.content == "r!Danni":
