@@ -1,10 +1,9 @@
 #py -3 main.py        
 import discord
-import xlrd
 import pandas as pd
 
 
-from Data.Embeds.profile import DanniEmbed
+from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 
 
 client = discord.Client()
@@ -28,6 +27,8 @@ async def on_message(message):
 
     if message.content == "r!help":
         await message.channel.send("hi")
+    elif message.content == "r!Riccardo":
+        await message.channel.send(embed=RiccardoEmbed)    
     elif message.content == "r!Danni":
         await message.channel.send(embed=DanniEmbed)
     elif message.content.startswith('r!hello'):
