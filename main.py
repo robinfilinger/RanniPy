@@ -1,4 +1,5 @@
 #py -3 main.py        
+from re import X
 from tokenize import Special
 import discord
 import pandas as pd
@@ -12,9 +13,10 @@ from dateutil import relativedelta
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
 from Data.Arrays.ranniPics import ranniPics
+from Data.Arrays.pokemonTypes import types
 
 #imported functions
-from Functions.length import len
+from Functions.length import length
 
 client = discord.Client()
 
@@ -22,7 +24,6 @@ client = discord.Client()
 async def on_ready():
     print("The Bot is Ready.")
     #print('We have logged in as {0.user}'.format(client))
- 
 
 
  
@@ -48,9 +49,16 @@ async def on_message(message):
     elif message.content == "r!anniversary":
         await message.channel.send("💍Ranni began on 1/10/2022💍")
     elif message.content == "r!length":
-        await message.channel.send(len())
+        await message.channel.send(length())
     elif message.content == "r!ranni":
         await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
+
+    elif message.content.startswith('r!pokeType'):
+        args = message.content.split(' ')
+        if len(args) == 1:
+            await message.channel.send('Goodbye!')
+        else:
+            await message.channel.send(args[1])
     
 
     elif message.content.startswith('r!hello'):

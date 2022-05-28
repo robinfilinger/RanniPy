@@ -2,7 +2,7 @@ from datetime import datetime, date
 from dateutil import relativedelta
 
 
-def len():
+def length():
     start = '10/1/2022'
 
     #get today's date in dd/mm/yyyy

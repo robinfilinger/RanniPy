@@ -1,5 +1,6 @@
 import discord
 
+#help
 helpEmbed=discord.Embed(description="Try using some of these commands!", color=0x00ffff)
 helpEmbed.set_author(name="😋Welcome to Ranni!😋")
 helpEmbed.set_thumbnail(url="https://raw.githubusercontent.com/robinfilinger/Ranni/main/BOT/Profile%20Pics/candid.JPG")
