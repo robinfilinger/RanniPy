@@ -9,14 +9,19 @@ import random
 from datetime import datetime, date
 from dateutil import relativedelta
 
-#imported variables
+#imported embeds
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
+from Data.Embeds.pokemon import typeEmbed
+
+#imported variables
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 
 #imported functions
 from Functions.length import length
+from Functions.pokeType import notValidType
+from Functions.pokeType import typeEffectiveness
 
 client = discord.Client()
 
@@ -55,10 +60,10 @@ async def on_message(message):
 
     elif message.content.startswith('r!pokeType'):
         args = message.content.split(' ')
-        if len(args) == 1:
-            await message.channel.send('Goodbye!')
+        if len(args) != 2:
+            await message.channel.send(notValidType())
         else:
-            await message.channel.send(args[1])
+            await message.channel.send(typeEffectiveness(args[1]))
     
 
     elif message.content.startswith('r!hello'):
