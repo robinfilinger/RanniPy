@@ -21,6 +21,7 @@ from Data.Arrays.pokemonTypes import types
 
 #imported functions
 from Functions.length import length
+from Functions.pets import petsList
 from Functions.pokeType import notValidType
 from Functions.pokeType import typeEffectiveness
 
@@ -35,7 +36,7 @@ async def on_ready():
  
 df = pd.read_excel('Pets.xlsx')
 print(df)
-print(df.iloc[1]['Name'])
+#print(df.iloc[1]['Name'])
 #if pd.isna(df.iloc[1]['Name']):
 #    print("true")
 #else:
@@ -79,12 +80,19 @@ async def on_message(message):
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')
 
-    elif message.content == "r!pets":
+    elif message.content.startswith("r!pets"):
+        args = message.content.split(' ')
+        message.channel.send(petsList())
         await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
     elif message.content == "r!test":
-        
-        await message.channel.send(len())
+        table_data = [
+            ['a', 'b', 'c'],
+            ['aaaaaaaaaa', 'b', 'c'], 
+            ['a', 'bbbbbbbbbb', 'c']
+        ]
+        for row in table_data:
+            await message.channel.send("{: >20} {: >20} {: >20}".format(*row))
 
     
 
