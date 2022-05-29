@@ -12,7 +12,6 @@ from dateutil import relativedelta
 #imported embeds
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
-from Data.Embeds.pokemon import typeEmbed
 
 #imported variables
 from Data.Arrays.ranniPics import ranniPics
@@ -63,8 +62,12 @@ async def on_message(message):
         if len(args) != 2:
             await message.channel.send(notValidType())
         else:
-            await message.channel.send(typeEffectiveness(args[1]))
-    
+            typeResponse = typeEffectiveness(args[1])
+            if typeResponse[0] == 0:
+                await message.channel.send(typeResponse[1])
+            else:
+                await message.channel.send(embed=typeResponse[1])
+
 
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')

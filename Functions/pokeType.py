@@ -1,3 +1,4 @@
+import discord
 from Data.Arrays.pokemonTypes import types
 
 def notValidType():
@@ -8,7 +9,13 @@ def typeEffectiveness(type):
     for x in range(len(types)):
        if type.lower() == types[x][0]:
            typeRow = x
+    if typeRow == None:
+        return [0, notValidType()]
+    
     pokeType = types[typeRow]
 
-    
-    return pokeType
+    typeEmbed=discord.Embed(title = pokeType[0].capitalize(), color=0x000000)
+    typeEmbed.set_thumbnail(url=pokeType[7])
+    typeEmbed.add_field(name= 'Attacking', value= "**Super Effective Against: **" + pokeType[1] + "\n**Not Very Effective Against: **" + pokeType[2] + "\n**Does Not Affect: **" + pokeType[3], inline=False)
+    typeEmbed.add_field(name= 'Defending', value= "**Vulnerable To: **" + pokeType[4] + "\n**Resistant To: **" + pokeType[5] + "\n**Immune To: **" + pokeType[6], inline=False)
+    return [1, typeEmbed]
