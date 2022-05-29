@@ -14,6 +14,7 @@ from dateutil import relativedelta
 #imported embeds
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
 from Data.Embeds.misc import helpEmbed
+from Data.Embeds.petEmbeds import petListEmbed
 
 #imported variables
 from Data.Arrays.ranniPics import ranniPics
@@ -80,10 +81,13 @@ async def on_message(message):
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')
 
-    elif message.content.startswith("r!pets"):
-        args = message.content.split(' ')
-        message.channel.send(petsList())
-        await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
+    elif message.content.startswith("r!pet"):
+        if message.content == "r!petsList":
+            await message.channel.send(embed=petListEmbed)
+        
+        #args = message.content.split(' ')
+        #message.channel.send(petsList())
+        #await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
     elif message.content == "r!test":
         table_data = [
@@ -93,6 +97,7 @@ async def on_message(message):
         ]
         for row in table_data:
             await message.channel.send("{: >20} {: >20} {: >20}".format(*row))
+        
 
     
 
