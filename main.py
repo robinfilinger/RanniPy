@@ -1,7 +1,9 @@
 #py -3 main.py        
+from cmath import nan
 from re import X
 from tokenize import Special
 import discord
+from numpy import NaN
 import pandas as pd
 import random
 
@@ -32,32 +34,37 @@ async def on_ready():
 
  
 df = pd.read_excel('Pets.xlsx')
-#print(df)
+print(df)
+print(df.iloc[1]['Name'])
+#if pd.isna(df.iloc[1]['Name']):
+#    print("true")
+#else:
+#    print("false")
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == "r!help":
+    if message.content == "r!help": #running
         await message.channel.send(embed=helpEmbed)
     
-    elif message.content == "r!hi":
+    elif message.content == "r!hi": #running
         await message.channel.send("❤️Love you Danni❤️")
 
-    elif message.content == "r!Riccardo":
+    elif message.content == "r!Riccardo": #running
         await message.channel.send(embed=RiccardoEmbed)    
-    elif message.content == "r!Danni":
+    elif message.content == "r!Danni": #running
         await message.channel.send(embed=DanniEmbed)
 
-    elif message.content == "r!anniversary":
+    elif message.content == "r!anniversary": #running
         await message.channel.send("💍Ranni began on 1/10/2022💍")
-    elif message.content == "r!length":
+    elif message.content == "r!length": #running
         await message.channel.send(length())
-    elif message.content == "r!ranni":
+    elif message.content == "r!ranni": #running
         await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
 
-    elif message.content.startswith('r!pokeType'):
+    elif message.content.startswith('r!pokeType'): #running
         args = message.content.split(' ')
         if len(args) != 2:
             await message.channel.send(notValidType())
@@ -76,6 +83,7 @@ async def on_message(message):
         await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
     elif message.content == "r!test":
+        
         await message.channel.send(len())
 
     
