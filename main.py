@@ -19,12 +19,13 @@ from Data.Embeds.petEmbeds import petListEmbed
 #imported variables
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
+from Data.Arrays.petArrays import petEmojis, petNatures
 
 
 #imported functions
-from Functions.dates import getCurrentDate
+from Functions.dates import MDYtoDMY, getCurrentDate
 from Functions.length import dateDiff, length
-from Functions.pets import findOwner
+from Functions.pets import findOwner, getPetEmoji, isValidPetType
 from Functions.pokeType import notValidType
 from Functions.pokeType import typeEffectiveness
 
@@ -94,14 +95,21 @@ async def on_message(message):
         await message.channel.send(embed=petListEmbed)
     elif message.content.startswith("r!addPet"):
         args = message.content.split(' ')
-        await message.channel.send("hello")
         if message.content == "r!addPet":
             await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
         else:
-            df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-            df.loc[len(df.index)] = [len(df.index), args[1], args[2], getCurrentDate(), 0, "shy", 0, 0, findOwner(message.author.name)]
-            print(df)
-            df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+            if len(args) != 3:
+                await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
+            elif isValidPetType(args[2]) != True:
+                await message.channel.send("Not a valid pet Type! Use r!petsList to see valid pet types!")
+            else:
+                df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+                df.loc[len(df.index)] = [len(df.index), args[1], args[2].capitalize() + getPetEmoji(args[2]), getCurrentDate(), 0, random.choice(petNatures), 0, 0, findOwner(message.author.name)]
+                #df.at[len(df.index)-1,"Age"] = dateDiff(MDYtoDMY(df.at[len(df.index)-1, "Birthday"]), MDYtoDMY(getCurrentDate()))
+                print(df)
+                df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+            
+            
     elif message.content == "r!myPets":
         df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
         await message.channel.send(df)
@@ -111,7 +119,7 @@ async def on_message(message):
         #await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
     elif message.content == "r!test":
-        await message.channel.send(message.author.name)
+        await message.channel.send(random.choice(petNatures))
         
 
     
