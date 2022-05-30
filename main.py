@@ -22,7 +22,6 @@ from Data.Arrays.pokemonTypes import types
 
 #imported functions
 from Functions.length import length
-from Functions.pets import petsList
 from Functions.pokeType import notValidType
 from Functions.pokeType import typeEffectiveness
 
@@ -34,9 +33,16 @@ async def on_ready():
     #print('We have logged in as {0.user}'.format(client))
 
 
- 
-df = pd.read_excel('Pets.xlsx')
+df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
 print(df)
+df.loc[len(df.index)] = [len(df.index), "Draco", "Dino", 0, "shy", 0, 0, 0]
+print(df)
+df.at[0,"FavFood"] = 5
+print(df) 
+df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+
+ 
+#check if pandas value is null
 #print(df.iloc[1]['Name'])
 #if pd.isna(df.iloc[1]['Name']):
 #    print("true")
@@ -81,9 +87,25 @@ async def on_message(message):
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')
 
-    elif message.content.startswith("r!pet"):
-        if message.content == "r!petsList":
-            await message.channel.send(embed=petListEmbed)
+    elif message.content == "r!petsList":
+        await message.channel.send(embed=petListEmbed)
+    elif message.content.startswith("r!addPet"):
+        args = message.content.split(' ')
+        await message.channel.send("hello")
+        if message.content == "r!addPet":
+            await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
+        else:
+            df = pd.read_excel('Pets.xlsx')
+            await message.channel.send(df)
+            df.loc[len(df.index)] = [len(df.index), args[1], args[2], 0, "shy", 0, 0, 0]
+            print(df)
+            await message.channel.send(df)
+            await message.channel.send(len(df.index))
+            df.to_excel('Pets.xlsx')
+    elif message.content == "r!myPets":
+        df = pd.read_excel('Pets.xlsx')
+        await message.channel.send(df)
+
         
         #args = message.content.split(' ')
         #message.channel.send(petsList())
