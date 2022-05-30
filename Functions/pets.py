@@ -4,6 +4,7 @@ from Data.Arrays.petArrays import petEmojis, petNatures
 from Functions.dates import MDYtoDMY, getCurrentDate
 from Functions.getUser import getUser
 from Functions.length import dateDiff
+from table2ascii import table2ascii as t2a, PresetStyle
 
 def getPetEmoji(type):
     for i in range(len(petEmojis)):
@@ -19,7 +20,7 @@ def isValidPetType(type):
 
 def adopt(args, author):
     df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-    df.loc[len(df.index)] = [len(df.index), args[1], args[2].capitalize() + getPetEmoji(args[2]), getCurrentDate(), 0, random.choice(petNatures), 0, 0, getUser(author)]
+    df.loc[len(df.index)] = [len(df.index), args[1], args[2].capitalize() + getPetEmoji(args[2]), getCurrentDate(), 0, random.choice(petNatures), getUser(author), 0, 0]
     df.at[len(df.index)-1,"Age"] = dateDiff(MDYtoDMY(df.at[len(df.index)-1, "Birthday"]), MDYtoDMY(getCurrentDate()))
     print(df)
     df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
@@ -29,5 +30,32 @@ def getTotalPets():
     df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
     return len(df.index)
 
+def getPet(index):
+    df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    petArray = [df.iloc[index]["ID"],
+        df.iloc[index]["Name"],
+        df.iloc[index]["Type"],
+        df.iloc[index]["Birthday"],
+        df.iloc[index]["Age"],
+        df.iloc[index]["Nature"],
+        df.iloc[index]["Owner"],
+        df.iloc[index]["FavFood"]
+        ]
+    return [petArray]
+
+#header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"]
+def getAllPets():
+    petArray = []
+    for i in range(getTotalPets()):
+        pet = getPet(i)
+        petArray = petArray + pet
+    return petArray
+
+def printAllPets():
+    output = t2a(
+    header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"],
+    body=getAllPets(),
+    )
+    return output
 
 

@@ -24,7 +24,7 @@ from Data.Arrays.petArrays import petEmojis, petNatures
 #imported functions
 from Functions.dates import MDYtoDMY, getCurrentDate
 from Functions.length import dateDiff, length
-from Functions.pets import adopt, getPetEmoji, getTotalPets, isValidPetType
+from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
 from Functions.pokeType import notValidType
 from Functions.pokeType import typeEffectiveness
 
@@ -86,13 +86,12 @@ async def on_message(message):
             else:
                 await message.channel.send(embed=typeResponse[1])
 
-
     elif message.content.startswith('r!hello'):
         await message.channel.send('Hello!')
 
-    elif message.content == "r!petsList":
+    elif message.content == "r!petsList": #running
         await message.channel.send(embed=petListEmbed)
-    elif message.content.startswith("r!adopt"):
+    elif message.content.startswith("r!adopt"): #running
         args = message.content.split(' ')
         if message.content == "r!adopt":
             await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
@@ -105,33 +104,19 @@ async def on_message(message):
                 await message.channel.send(adopt(args, message.author.name))
             
             
-    elif message.content == "r!myPets":
-        df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-        await message.channel.send(df)
-        
-        #args = message.content.split(' ')
-        #message.channel.send(petsList())
-        #await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
+    elif message.content == "r!allPets":
+
+        await message.channel.send(f"```\n{printAllPets()}\n```")
 
     elif message.content == "r!test":
-        TwoD = [[1,30,40,35,30]]
-        TwoD = TwoD + [[2,30,40,35,40]]
-        
+        output = t2a(
+        header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "Owner", "Fav Food"],
+        body=getAllPets(),
+        )
 
-        #for i in range(getTotalPets())
-
-        
-        #output = t2a(
-        #header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"],
-        #body=TwoD,
-        #footer=["SUM", "130", "140", "135", "130"],
-        #)
-
-        #await message.channel.send(f"```\n{output}\n```")
-        await message.channel.send(getTotalPets())
-
-        
-        print(TwoD)
+        await message.channel.send(f"```\n{output}\n```")
+        #await message.channel.send(getTotalPets())
+        #print(TwoD)
 
         
 
