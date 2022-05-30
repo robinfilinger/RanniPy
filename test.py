@@ -1,16 +1,5 @@
-from openpyxl import Workbook
-from openpyxl import load_workbook
-
-workbook = Workbook()
-sheet = workbook.active
-
-sheet["A1"] = "hello"
-sheet["B1"] = "world!"
-
-workbook.save(filename="hello_world.xlsx")
-
-workbook = load_workbook(filename="hello_world.xlsx")
-
-
-print(sheet["A1"].value)
-
+TwoD = []
+TwoD = TwoD + [[2,30,40,35,40]]
+pet = [[1,2,3,4,5,]]
+TwoD = TwoD + pet
+print(TwoD)

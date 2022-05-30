@@ -1,7 +1,5 @@
 #py -3 main.py        
-from cmath import nan
 from re import X
-from tokenize import Special
 import discord
 from numpy import NaN
 import pandas as pd
@@ -10,6 +8,7 @@ import random
 
 from datetime import datetime, date
 from dateutil import relativedelta
+from table2ascii import table2ascii as t2a, PresetStyle
 
 #imported embeds
 from Data.Embeds.profile import DanniEmbed, RiccardoEmbed
@@ -25,7 +24,7 @@ from Data.Arrays.petArrays import petEmojis, petNatures
 #imported functions
 from Functions.dates import MDYtoDMY, getCurrentDate
 from Functions.length import dateDiff, length
-from Functions.pets import findOwner, getPetEmoji, isValidPetType
+from Functions.pets import adopt, getPetEmoji, getTotalPets, isValidPetType
 from Functions.pokeType import notValidType
 from Functions.pokeType import typeEffectiveness
 
@@ -93,9 +92,9 @@ async def on_message(message):
 
     elif message.content == "r!petsList":
         await message.channel.send(embed=petListEmbed)
-    elif message.content.startswith("r!addPet"):
+    elif message.content.startswith("r!adopt"):
         args = message.content.split(' ')
-        if message.content == "r!addPet":
+        if message.content == "r!adopt":
             await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
         else:
             if len(args) != 3:
@@ -103,11 +102,7 @@ async def on_message(message):
             elif isValidPetType(args[2]) != True:
                 await message.channel.send("Not a valid pet Type! Use r!petsList to see valid pet types!")
             else:
-                df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-                df.loc[len(df.index)] = [len(df.index), args[1], args[2].capitalize() + getPetEmoji(args[2]), getCurrentDate(), 0, random.choice(petNatures), 0, 0, findOwner(message.author.name)]
-                #df.at[len(df.index)-1,"Age"] = dateDiff(MDYtoDMY(df.at[len(df.index)-1, "Birthday"]), MDYtoDMY(getCurrentDate()))
-                print(df)
-                df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+                await message.channel.send(adopt(args, message.author.name))
             
             
     elif message.content == "r!myPets":
@@ -119,7 +114,25 @@ async def on_message(message):
         #await message.channel.send("Name: " + "*" + df.iloc[0]['Name'] + "*" + "\nType: " + df.iloc[0]['Type'] + "\nNature: " + df.iloc[0]['Nature'])
 
     elif message.content == "r!test":
-        await message.channel.send(random.choice(petNatures))
+        TwoD = [[1,30,40,35,30]]
+        TwoD = TwoD + [[2,30,40,35,40]]
+        
+
+        #for i in range(getTotalPets())
+
+        
+        #output = t2a(
+        #header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"],
+        #body=TwoD,
+        #footer=["SUM", "130", "140", "135", "130"],
+        #)
+
+        #await message.channel.send(f"```\n{output}\n```")
+        await message.channel.send(getTotalPets())
+
+        
+        print(TwoD)
+
         
 
     
