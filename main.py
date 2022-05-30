@@ -33,13 +33,13 @@ async def on_ready():
     #print('We have logged in as {0.user}'.format(client))
 
 
-df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-print(df)
-df.loc[len(df.index)] = [len(df.index), "Draco", "Dino", 0, "shy", 0, 0, 0]
-print(df)
-df.at[0,"FavFood"] = 5
-print(df) 
-df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+#df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+#print(df)
+#df.loc[len(df.index)] = [len(df.index), "Draco", "Dino", 0, "shy", 0, 0, 0]
+#print(df)
+#df.at[0,"FavFood"] = 5
+#print(df) 
+#df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
 
  
 #check if pandas value is null
@@ -95,17 +95,13 @@ async def on_message(message):
         if message.content == "r!addPet":
             await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
         else:
-            df = pd.read_excel('Pets.xlsx')
-            await message.channel.send(df)
-            df.loc[len(df.index)] = [len(df.index), args[1], args[2], 0, "shy", 0, 0, 0]
+            df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+            df.loc[len(df.index)] = [len(df.index), args[1], args[2], 0, 0, "shy", 0, 0, "Riccardo"]
             print(df)
-            await message.channel.send(df)
-            await message.channel.send(len(df.index))
-            df.to_excel('Pets.xlsx')
+            df.to_excel('Data/SaveFiles/Pets.xlsx')
     elif message.content == "r!myPets":
-        df = pd.read_excel('Pets.xlsx')
+        df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
         await message.channel.send(df)
-
         
         #args = message.content.split(' ')
         #message.channel.send(petsList())
