@@ -1,7 +1,6 @@
 from datetime import datetime, date
 from dateutil import relativedelta
 
-
 def length():
     start = '10/1/2022'
 
@@ -32,4 +31,12 @@ def length():
     else: 
         length = '🥰Ranni has been together for ' + str(delta.years) + ' years, ' + str(delta.months) + ' months, and ' + str(delta.days) + ' days!🥰'
     return length
+
+def dateDiff(start, end):
+    start_date = datetime.strptime(start, "%d/%m/%Y")
+    end_date = datetime.strptime(end, "%d/%m/%Y")
+
+    delta = relativedelta.relativedelta(end_date, start_date)
+
+    return str(delta.years) + " years, " + str(delta.months) + " months, and " + str(delta.days) + " days" 
 
