@@ -38,5 +38,5 @@ def dateDiff(start, end):
 
     delta = relativedelta.relativedelta(end_date, start_date)
 
-    return str(delta.years) + " years, " + str(delta.months) + " months, and " + str(delta.days) + " days" 
+    return str(delta.years) + " y, " + str(delta.months) + " m, and " + str(delta.days) + " d" 
 

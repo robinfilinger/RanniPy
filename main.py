@@ -94,27 +94,21 @@ async def on_message(message):
     elif message.content.startswith("r!adopt"): #running
         args = message.content.split(' ')
         if message.content == "r!adopt":
-            await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
+            await message.channel.send("Send message in the following format!\n\n r!adopt *Name* *Type*")
         else:
             if len(args) != 3:
                 await message.channel.send("Send message in the following format!\n\n r!addPet *Name* *Type*")
             elif isValidPetType(args[2]) != True:
                 await message.channel.send("Not a valid pet Type! Use r!petsList to see valid pet types!")
             else:
-                await message.channel.send(adopt(args, message.author.name))
-            
-            
+                await message.channel.send(adopt(args, message.author.name))      
     elif message.content == "r!allPets":
-
         await message.channel.send(f"```\n{printAllPets()}\n```")
 
     elif message.content == "r!test":
-        output = t2a(
-        header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "Owner", "Fav Food"],
-        body=getAllPets(),
-        )
+        
 
-        await message.channel.send(f"```\n{output}\n```")
+        await message.channel.send(getCurrentDate())
         #await message.channel.send(getTotalPets())
         #print(TwoD)
 

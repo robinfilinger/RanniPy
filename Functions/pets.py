@@ -28,10 +28,15 @@ def adopt(args, author):
 
 def getTotalPets():
     df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    for i in range(len(df.index)):
+         df.at[i,"Age"] = dateDiff(MDYtoDMY(df.iloc[i]["Birthday"]), MDYtoDMY(getCurrentDate()))
+    df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
     return len(df.index)
 
 def getPet(index):
     df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    start = MDYtoDMY(df.iloc[index]["Birthday"])
+    end = MDYtoDMY(getCurrentDate())
     petArray = [df.iloc[index]["ID"],
         df.iloc[index]["Name"],
         df.iloc[index]["Type"],
@@ -53,9 +58,10 @@ def getAllPets():
 
 def printAllPets():
     output = t2a(
-    header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"],
+    header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "Owner", "FavFood"],
     body=getAllPets(),
     )
     return output
+
 
 
