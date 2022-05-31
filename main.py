@@ -1,5 +1,5 @@
 #py -3 main.py        
-from re import X
+from re import A, X
 import discord
 from numpy import NaN
 import pandas as pd
@@ -19,6 +19,7 @@ from Data.Embeds.petEmbeds import petListEmbed
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 from Data.Arrays.petArrays import petEmojis, petNatures
+from Functions.countdowns import addCountdown
 
 
 #imported functions
@@ -35,27 +36,12 @@ async def on_ready():
     print("The Bot is Ready.")
     #print('We have logged in as {0.user}'.format(client))
 
-
-#df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
-#print(df)
-#df.loc[len(df.index)] = [len(df.index), "Draco", "Dino", 0, "shy", 0, 0, 0]
-#print(df)
-#df.at[0,"FavFood"] = 5
-#print(df) 
-#df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
-
- 
-#check if pandas value is null
-#print(df.iloc[1]['Name'])
-#if pd.isna(df.iloc[1]['Name']):
-#    print("true")
-#else:
-#    print("false")
-
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
+
+    args = message.content.split(" ")
 
     if message.content == "r!help": #running
         await message.channel.send(embed=helpEmbed)
@@ -76,7 +62,6 @@ async def on_message(message):
         await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
 
     elif message.content.startswith('r!pokeType'): #running
-        args = message.content.split(' ')
         if len(args) != 2:
             await message.channel.send(notValidType())
         else:
@@ -92,7 +77,6 @@ async def on_message(message):
     elif message.content == "r!petsList": #running
         await message.channel.send(embed=petListEmbed)
     elif message.content.startswith("r!adopt"): #running
-        args = message.content.split(' ')
         if message.content == "r!adopt":
             await message.channel.send("Send message in the following format!\n\n r!adopt *Name* *Type*")
         else:
@@ -104,13 +88,16 @@ async def on_message(message):
                 await message.channel.send(adopt(args, message.author.name))      
     elif message.content == "r!allPets":
         await message.channel.send(f"```\n{printAllPets()}\n```")
+   
+    elif message.content == "r!countdowns":
+        await message.channel.send("Countdowns list!")
+    elif message.content == "r!addCountdown":    
+        await message.channel.send(addCountdown(args))
 
     elif message.content == "r!test":
-        
-
         await message.channel.send(getCurrentDate())
-        #await message.channel.send(getTotalPets())
-        #print(TwoD)
+    
+    
 
         
 
