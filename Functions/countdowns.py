@@ -18,7 +18,6 @@ def addCountdown(args):
 def timeUntil(endDate, endTime, Meridem):
     today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start = str(today).split(" ")
-    print(start)
 
     endList = endDate + " " + endTime + ":00"
     end = endList.split(" ")
@@ -31,20 +30,38 @@ def timeUntil(endDate, endTime, Meridem):
     elif Meridem == "PM":
         if int(endTime[0]) !=12:
             endTime[0] = str(int(endTime[0]) + 12)
+    end[1] = endTime[0] + ":" + endTime[1] + ":" + endTime[2]
 
+    print(start)
     print(end)
-    print(endTime)
-    #print(endList)
+
+    start_date = datetime.strptime(start[0], "%Y-%m-%d")
+    end_date = datetime.strptime(end[0], "%Y-%m-%d")
+    delta = relativedelta.relativedelta(end_date, start_date)
+
+    start_time = datetime.strptime(start[1],"%H:%M:%S")
+    end_time = datetime.strptime(end[1],"%H:%M:%S")
+
+    time_interval = str(end_time - start_time) 
+    timeDiff = time_interval.split(",")
     
-    #print(str(datetime.now()))
-    #print(end)
-    #endtime = datetime.strptime(end, "%Y-%m-%d %H:%M:%S")
-
-    #start_date = datetime.strptime(today, "%d/%m/%Y")
-    #end_date = datetime.strptime(end, "%d/%m/%Y")
-
-    #delta = relativedelta.relativedelta(today, endTime)
-
-    #print(str(today))
-    #print(str(endtime))
-    return
+    if delta.years == 0 and delta.months == 0 and delta.days == 0:
+        if time_interval.startswith("-1 day"):
+            return "Invalid End"
+        else: 
+            return time_interval
+    elif delta.years == 0 and delta.months == 0 and delta.days == 1 and len(timeDiff)>1:
+        return timeDiff[1]
+    else:
+        if delta.years == 0 and delta.months == 0 and delta.days == 0 and len(timeDiff) == 2:
+            return "Invalid End"
+        elif delta.years == 0 and delta.months == 0 and delta.days<4 and len(timeDiff) == 2:
+            return str(delta.days -1) + " days " + timeDiff[1] + " chicken"
+        elif delta.years == 0 and delta.months == 0 and len(timeDiff) == 2:
+            return str(delta.days -1) + " days  pig" 
+        elif delta.years == 0 and delta.months == 0:
+            return str(delta.days) + " days "
+        elif delta.years == 0:
+            return str(delta.months) + " months, " + str(delta.days) + " days"
+        else: 
+            return str(delta.years) + " years, " + str(delta.months) + " months, " + str(delta.days) + " days"

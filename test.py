@@ -6,5 +6,5 @@ from Functions.pets import getPet, getTotalPets
 args = ["command", "Together", "5/5/10", "9:30", "PM"]
 #print(addCountdown(args))
 
-time = timeUntil("2022-05-31", "12:30", "AM")
+time = timeUntil("2022-06-08", "2:30", "PM")
 print(time)
