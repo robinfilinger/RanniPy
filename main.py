@@ -40,20 +40,24 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
     args = message.content.split(" ")
 
     if message.content == "r!help": #running
         await message.channel.send(embed=helpEmbed)
     
+    #basic
     elif message.content == "r!hi": #running
         await message.channel.send("❤️Love you Danni❤️")
+    elif message.content.startswith('r!hello'):
+        await message.channel.send('Hello!')
 
+    #profile
     elif message.content == "r!Riccardo": #running
         await message.channel.send(embed=RiccardoEmbed)    
     elif message.content == "r!Danni": #running
         await message.channel.send(embed=DanniEmbed)
 
+    #relationship
     elif message.content == "r!anniversary": #running
         await message.channel.send("💍Ranni began on 1/10/2022💍")
     elif message.content == "r!length": #running
@@ -61,6 +65,7 @@ async def on_message(message):
     elif message.content == "r!ranni": #running
         await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
 
+    #pokemon
     elif message.content.startswith('r!pokeType'): #running
         if len(args) != 2:
             await message.channel.send(notValidType())
@@ -71,8 +76,7 @@ async def on_message(message):
             else:
                 await message.channel.send(embed=typeResponse[1])
 
-    elif message.content.startswith('r!hello'):
-        await message.channel.send('Hello!')
+
 
     elif message.content == "r!petsList": #running
         await message.channel.send(embed=petListEmbed)
@@ -91,17 +95,11 @@ async def on_message(message):
    
     elif message.content == "r!countdowns":
         await message.channel.send("Countdowns list!")
-    elif message.content == "r!addCountdown":    
-        await message.channel.send(addCountdown(args))
+    elif message.content.startswith("r!addCountdown"):
+        await message.channel.send(addCountdown(message.content))
 
     elif message.content == "r!test":
         await message.channel.send(getCurrentDate())
     
-    
-
-        
-
-    
-
 
 client.run("OTc4NzMxMjI5NTcyNjQ0ODc0.Gm2gw7.18S9AIUMqeCh64EKafRQ_r59A2r4IO67rVp1BM")
