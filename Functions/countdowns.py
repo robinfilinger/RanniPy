@@ -1,7 +1,7 @@
 from datetime import date, datetime
+from time import time
 from dateutil import relativedelta
 import pandas as pd
-from Data.Arrays.petArrays import petEmojis, petNatures
 from Functions.dates import MDYtoDMY, getCurrentDate, printYMD
 from Functions.length import dateDiff
 from table2ascii import table2ascii as t2a, PresetStyle
@@ -10,24 +10,24 @@ import re
 countdownTitle = ""
 countdownInfo = ""
 
-
+#adds countdown
 def addCountdown(message):
-     
     if isCountdownValid(message):
-        return getCountdownTitle("true")
+        countdownInfo = replaceTitle(message)
+        args = countdownInfo.split(" ")
 
-        #df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
-        #df.loc[len(df.index)] = [args[1], args[2], args[3], args[4]]
-        #print(df)
-        #df.to_excel('Data/SaveFiles/countdowns.xlsx', index=False)
-        #return "Countdown *" + args[1] + "* has been added!"
-    return countdownError()
+        df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
+        df.loc[len(df.index)] = [getCountdownTitle(message), args[2], args[3], args[4]]
+        df.to_excel('Data/SaveFiles/countdowns.xlsx', index=False)
+        return "Countdown *" + getCountdownTitle(message) + "* has been added!"
+    else:
+        return countdownError()
 
+#checks that countdown is properly formatted
 def isCountdownValid(message):
     if isCountdownTitle(message) == False:
         return False
 
-    countdownTitle = getCountdownTitle(message)
     countdownInfo = replaceTitle(message)
     args = countdownInfo.split(" ")
 
@@ -58,14 +58,42 @@ def getCountdownTitle(message):
     title = re.search('"(.*)"', message)
     return title.group(1)
 
-#returns error message with proper formatting instructions
-def countdownError():
-    return 'Please enter countdown and end date in the following format:\n\nr!addCountdown **"Countdown Name"** YYYY-MM-DD HH:MM AM/PM\n\nExample: r!addCountdown "Reunited" 12:30 PM' 
-
+#replaces title with placeholder
 def replaceTitle(message):
     return re.sub('".*?"', 'title', message)
-    
 
+#returns error message with proper formatting instructions
+def countdownError():
+    return '**Please enter countdown and end date in the following format:**\n\nr!addCountdown **"Countdown Name"** YYYY-MM-DD HH:MM AM/PM\n\nExample: r!addCountdown "Reunited" 2023-12-21 12:30 PM' 
+
+def getTotalCountdowns():
+    df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
+    return len(df.index)
+
+def getCountdown(index):
+    df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
+    countdownArray = [df.iloc[index]["Name"],
+        timeUntil(df.iloc[index]["End Date"], df.iloc[index]["End Time"], df.iloc[index]["Meridem"] ),
+        ]
+    return [countdownArray]
+
+def getAllCountdowns():
+    countdownArray = []
+    for i in range(getTotalCountdowns()):
+        countdown = getCountdown(i)
+        print(countdown)
+        countdownArray = countdownArray + countdown
+    return countdownArray
+
+def printAllCountdowns():
+    output = t2a(
+    header=["Title", "Time Remaining"],
+    body=getAllCountdowns(),
+    )
+    return output
+
+
+#takes an end date and time and calculates time until that date and time
 def timeUntil(endDate, endTime, Meridem):
     today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start = str(today).split(" ")
@@ -83,9 +111,6 @@ def timeUntil(endDate, endTime, Meridem):
             endTime[0] = str(int(endTime[0]) + 12)
     end[1] = endTime[0] + ":" + endTime[1] + ":" + endTime[2]
 
-    print(start)
-    print(end)
-
     start_date = datetime.strptime(start[0], "%Y-%m-%d")
     end_date = datetime.strptime(end[0], "%Y-%m-%d")
     delta = relativedelta.relativedelta(end_date, start_date)
@@ -94,7 +119,7 @@ def timeUntil(endDate, endTime, Meridem):
     if(delta.days<=3):
         start_time = datetime.strptime(start[1],"%H:%M:%S")
         end_time = datetime.strptime(end[1],"%H:%M:%S")
-        return 
+        return str(delta.days) 
     else:
         return printYMD(delta.years, delta.months, delta.days)
 

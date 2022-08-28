@@ -19,15 +19,18 @@ from Data.Embeds.petEmbeds import petListEmbed
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 from Data.Arrays.petArrays import petEmojis, petNatures
-from Functions.countdowns import addCountdown
+from Functions.countdowns import addCountdown, printAllCountdowns
 
 
 #imported functions
 from Functions.dates import MDYtoDMY, getCurrentDate
 from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
-from Functions.pokeType import notValidType
-from Functions.pokeType import typeEffectiveness
+from Functions.pokemon import notValidType, pokedexInfo
+from Functions.pokemon import typeEffectiveness
+
+from test import databaseRead
+from Functions.databases import addRecipe
 
 client = discord.Client()
 
@@ -75,6 +78,13 @@ async def on_message(message):
                 await message.channel.send(typeResponse[1])
             else:
                 await message.channel.send(embed=typeResponse[1])
+                
+    elif message.content.startswith('r!poke '):
+        if message.content == "r!poke":
+            message.channel.send('enter r!poke [pokemon]')
+        else:
+            message.channel.send(pokedexInfo(message.content))
+
 
 
 
@@ -94,12 +104,14 @@ async def on_message(message):
         await message.channel.send(f"```\n{printAllPets()}\n```")
    
     elif message.content == "r!countdowns":
-        await message.channel.send("Countdowns list!")
+        await message.channel.send(f"```\n{printAllCountdowns()}\n```")
     elif message.content.startswith("r!addCountdown"):
         await message.channel.send(addCountdown(message.content))
 
-    elif message.content == "r!test":
-        await message.channel.send(getCurrentDate())
-    
 
-client.run("OTc4NzMxMjI5NTcyNjQ0ODc0.Gm2gw7.18S9AIUMqeCh64EKafRQ_r59A2r4IO67rVp1BM")
+    elif message.content == "r!test":
+        await message.channel.send("https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/bulbasaur.png")
+        #await message.channel.send(databaseRead())
+        #await message.channel.send(addRecipe('Spaghetti with Garlic and Oil'))
+
+client.run("")
