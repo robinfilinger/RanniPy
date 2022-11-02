@@ -19,18 +19,23 @@ from Data.Embeds.petEmbeds import petListEmbed
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 from Data.Arrays.petArrays import petEmojis, petNatures
+from Functions.Credentials import loadCreds
 from Functions.countdowns import addCountdown, printAllCountdowns
 
 
 #imported functions
 from Functions.dates import MDYtoDMY, getCurrentDate
+from Functions.getUser import doesUserExist
 from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
 from Functions.pokemon import notValidType, pokedexInfo
 from Functions.pokemon import typeEffectiveness
 
-from test import databaseRead
+#from test import databaseRead
 from Functions.databases import addRecipe
+
+
+BOT_TOKEN = loadCreds('Token')
 
 client = discord.Client()
 
@@ -43,7 +48,13 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    
     args = message.content.split(" ")
+
+    if doesUserExist(message.author.id):
+        await message.channel.send(message.author.id)
+        await message.channel.send(message.author.name)
+
 
     if message.content == "r!help": #running
         await message.channel.send(embed=helpEmbed)
@@ -71,13 +82,14 @@ async def on_message(message):
     #pokemon
     elif message.content.startswith('r!pokeType'): #running
         if len(args) != 2:
-            await message.channel.send(notValidType())
+           await message.channel.send(notValidType())
         else:
             typeResponse = typeEffectiveness(args[1])
             if typeResponse[0] == 0:
                 await message.channel.send(typeResponse[1])
             else:
                 await message.channel.send(embed=typeResponse[1])
+  
                 
     elif message.content.startswith('r!poke '):
         if message.content == "r!poke":
@@ -114,4 +126,4 @@ async def on_message(message):
         #await message.channel.send(databaseRead())
         #await message.channel.send(addRecipe('Spaghetti with Garlic and Oil'))
 
-client.run("")
+client.run(BOT_TOKEN)

@@ -29,6 +29,4 @@ def read():
     print(hello)
     return hello
 
-print(read())
-
 conn.close()

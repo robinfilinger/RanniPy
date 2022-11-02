@@ -5,3 +5,7 @@ def getUser(username):
         return "Danni"
     else:
         return "User not found!"
+
+def doesUserExist(userID):
+    return True
+

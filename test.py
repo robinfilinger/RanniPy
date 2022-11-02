@@ -15,7 +15,14 @@ from Functions.pokemon import pokedexInfo
 
 import pyodbc 
 
+myObject = {}
+with open("config.txt") as f:
+  for line in f.readlines():
+    key, value = line.rstrip("\n").split("=")
+    myObject[key] = value
 
+print(myObject['Token'])
+print('hi')
 
 #read(cnxn)
 #create(cnxn)
@@ -25,20 +32,20 @@ import pyodbc
 #cnxn.close()
 
 
-def databaseRead():
-    cnxn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
-                        "Server=DESKTOP-SQR7QOT\SQLEXPRESS;"
-                        "Database=Cooking;"
-                        "Trusted_Connection=yes")
-    hello = ""
-    print("read")
-    cursor = cnxn.cursor()
-    cursor.execute('select * from Recipes')
-    for row in cursor:
-        print (f'row = {row}')
-        print (row[1])
-        hello = hello + row[1]
-    print(hello)
-    return hello
+#def databaseRead():
+    #cnxn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
+                        #"Server=DESKTOP-SQR7QOT\SQLEXPRESS;"
+                        #"Database=Cooking;"
+                        #"Trusted_Connection=yes")
+    #hello = ""
+    #print("read")
+    #cursor = cnxn.cursor()
+    #cursor.execute('select * from Recipes')
+    #for row in cursor:
+    #    print (f'row = {row}')
+    #    print (row[1])
+    #    hello = hello + row[1]
+    #print(hello)
+    #return hello
 
-print(databaseRead())
+#print(databaseRead())
