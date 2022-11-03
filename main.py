@@ -24,7 +24,7 @@ from Functions.countdowns import addCountdown, printAllCountdowns
 
 
 #imported functions
-from Functions.dates import MDYtoDMY, getCurrentDate
+from Functions.dates import MDYtoDMY, getCurrentDate, holidayList
 from Functions.getUser import doesUserExist
 from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
@@ -51,9 +51,9 @@ async def on_message(message):
     
     args = message.content.split(" ")
 
-    if doesUserExist(message.author.id):
-        await message.channel.send(message.author.id)
-        await message.channel.send(message.author.name)
+    #if doesUserExist(message.author.id):
+    #    await message.channel.send(message.author.id)
+    #    await message.channel.send(message.author.name)
 
 
     if message.content == "r!help": #running
@@ -97,9 +97,7 @@ async def on_message(message):
         else:
             message.channel.send(pokedexInfo(message.content))
 
-
-
-
+#pets
     elif message.content == "r!petsList": #running
         await message.channel.send(embed=petListEmbed)
     elif message.content.startswith("r!adopt"): #running
@@ -114,11 +112,16 @@ async def on_message(message):
                 await message.channel.send(adopt(args, message.author.name))      
     elif message.content == "r!allPets":
         await message.channel.send(f"```\n{printAllPets()}\n```")
-   
+
+#countdowns   
     elif message.content == "r!countdowns":
         await message.channel.send(f"```\n{printAllCountdowns()}\n```")
     elif message.content.startswith("r!addCountdown"):
         await message.channel.send(addCountdown(message.content))
+
+
+    elif message.content.startswith("r!calendar"):
+        await message.channel.send(holidayList())
 
 
     elif message.content == "r!test":

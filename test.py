@@ -1,6 +1,7 @@
 import pandas as pd
 from Functions.countdowns import addCountdown, isCountdownValid, timeUntil, getTotalCountdowns
 import re
+from Functions.dates import holidayList
 
 from Functions.pets import getPet, getTotalPets
 from Functions.pokemon import pokedexInfo
@@ -14,15 +15,32 @@ from Functions.pokemon import pokedexInfo
 #print(pokedexInfo("r!poke Bulbasaur"))
 
 import pyodbc 
+from datetime import date, datetime
+import holidays
 
-myObject = {}
-with open("config.txt") as f:
-  for line in f.readlines():
-    key, value = line.rstrip("\n").split("=")
-    myObject[key] = value
+# Select country
+#us_holidays = holidays.US()
+#print(us_holidays)
+#print(us_holidays.get('2022'))
 
-print(myObject['Token'])
-print('hi')
+# Print all the holidays in US in year 2018
+#for hol in holidays.US(years = 2022).items():
+#    print(hol)
+
+#print(holidays.US(years = 2022).items())
+#calendar = holidays.US(years = 2022).items()
+#for x in calendar:
+    #print(str(x))
+
+holidayList()
+
+
+
+
+
+
+
+
 
 #read(cnxn)
 #create(cnxn)

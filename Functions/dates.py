@@ -1,4 +1,7 @@
 from datetime import date
+import holidays
+import pandas as pd
+
 
 def getCurrentDate():
     currentDate = str(date.today())
@@ -17,3 +20,15 @@ def printYMD(years, months, days):
         return str(months) + " months, " + str(days) + " days"
     else: 
         return str(years) + " years, " + str(months) + " months, " + str(days) + " days"
+
+def holidayList():
+    year = date.today().year
+    calendar = list(holidays.US(years = year).items())
+    df = pd.DataFrame(calendar)
+    df.rename(columns={df.columns[0]: 'Date', df.columns[1]: 'Name'},inplace=True)
+    print(df.columns)
+    print(df['Date'])
+    print(df)
+    print(date.today())
+    return calendar[1]
+     

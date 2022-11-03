@@ -1,0 +1,13 @@
+
+#Title, Date, Message, Image
+holidayInfo = [
+    ["New Year's Day", 1/1, '🎉🥳Happy New Years!🎊🍾','placeholder'],
+    ['Epiphany', 1/6, 'Happy Epiphany!, placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾','placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾, placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾, placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾, placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾, placeholder'],
+    ['New Years Day', 1/1, '🎉🥳Happy New Years!🎊🍾, placeholder'],
+
+]
