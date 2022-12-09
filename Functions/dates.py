@@ -1,6 +1,7 @@
 from datetime import date
 import holidays
 import pandas as pd
+from Data.Arrays.holidays import holidayInfo
 
 
 def getCurrentDate():
@@ -21,14 +22,45 @@ def printYMD(years, months, days):
     else: 
         return str(years) + " years, " + str(months) + " months, " + str(days) + " days"
 
-def holidayList():
+def isTodayHoliday():
+    #get current year
     year = date.today().year
-    calendar = list(holidays.US(years = year).items())
-    df = pd.DataFrame(calendar)
-    df.rename(columns={df.columns[0]: 'Date', df.columns[1]: 'Name'},inplace=True)
-    print(df.columns)
-    print(df['Date'])
-    print(df)
-    print(date.today())
-    return calendar[1]
-     
+    print(year)
+
+    calendar = holidayList(year)
+    
+    #get today's holiday
+    today = calendar.loc[calendar['Date'] == str(date.today())]
+    todaylength = len(today)
+    todayResult = today.values.tolist()
+
+    if todaylength == 0:
+        return 'No holidays today!'
+    else:
+        for x in range(len(holidayInfo)):
+            if holidayInfo[x][0] == todayResult[0][1]:
+                return holidayInfo[x][1]
+    return 'No holidays today!'
+       
+def holidayList(year):
+    #get US and Mexico holiday list from this year
+    holidaysUS = list(holidays.US(years = year, observed = False).items())
+    holidaysMX = list(holidays.MX(years = year).items())
+
+    calendar = pd.DataFrame(holidaysUS)
+    #Mexico calendar does not look accurate
+    #calendarMX = pd.DataFrame(holidaysMX)
+    #calendar = pd.concat([calendarUS,calendarMX]).drop_duplicates().reset_index(drop=True)
+
+    #rename columns to name and date
+    calendar.rename(columns={calendar.columns[0]: 'Date', calendar.columns[1]: 'Name'},inplace=True)
+    
+    #Add *Special holidays
+    moreHolidays = pd.DataFrame({'Date': [str(year)+'-01-10',str(year)+'-07-27',str(year)+'-08-25',str(year)+'-11-01',str(year)+'-11-02',str(year)+'-12-24'],
+                                 'Name': ['Ranni Day', 'Danni Day', 'Riccardo Day', 'Dia de Los Muertos', 'Dia de Los Muertos', 'Christmas Eve']})
+    calendar = pd.concat([calendar,moreHolidays]).reset_index(drop=True)
+    calendar['Date'] = calendar['Date'].astype(str)
+    
+    return calendar
+
+   

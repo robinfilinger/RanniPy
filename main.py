@@ -4,6 +4,7 @@ import discord
 from numpy import NaN
 import pandas as pd
 import random
+import time
 
 
 from datetime import datetime, date
@@ -19,12 +20,13 @@ from Data.Embeds.petEmbeds import petListEmbed
 from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 from Data.Arrays.petArrays import petEmojis, petNatures
+from Data.poem import poem
 from Functions.Credentials import loadCreds
 from Functions.countdowns import addCountdown, printAllCountdowns
 
 
 #imported functions
-from Functions.dates import MDYtoDMY, getCurrentDate, holidayList
+from Functions.dates import MDYtoDMY, getCurrentDate, holidayList, isTodayHoliday
 from Functions.getUser import doesUserExist
 from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
@@ -120,7 +122,9 @@ async def on_message(message):
         await message.channel.send(addCountdown(message.content))
 
 
-    elif message.content.startswith("r!calendar"):
+    elif message.content.startswith("r!today"):
+        await message.channel.send(isTodayHoliday())
+    elif message.content.startswith("r!holidays"):
         await message.channel.send(holidayList())
 
 
@@ -128,5 +132,26 @@ async def on_message(message):
         await message.channel.send("https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/bulbasaur.png")
         #await message.channel.send(databaseRead())
         #await message.channel.send(addRecipe('Spaghetti with Garlic and Oil'))
+    elif message.content == "r!miAmor":
+        await message.channel.send(poem(0))
+        time.sleep(4)
+        await message.channel.send(poem(1))
+        time.sleep(4)
+        await message.channel.send(poem(2))
+        time.sleep(4)
+        await message.channel.send(poem(3))
+        time.sleep(4)
+        await message.channel.send(poem(4))
+        time.sleep(4)
+        await message.channel.send(poem(5))
+        time.sleep(4)
+        await message.channel.send(poem(6))
+        time.sleep(4)
+        await message.channel.send(poem(7))
+        time.sleep(4)
+        await message.channel.send(poem(8))
+        time.sleep(4)
+        await message.channel.send(poem(9))
+        
 
 client.run(BOT_TOKEN)
