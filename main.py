@@ -122,10 +122,11 @@ async def on_message(message):
         await message.channel.send(addCountdown(message.content))
 
 
-    elif message.content.startswith("r!today"):
+    elif message.content == "r!today":
         await message.channel.send(isTodayHoliday())
-    elif message.content.startswith("r!holidays"):
+    elif message.content == "r!holidays":
         await message.channel.send(holidayList())
+
 
 
     elif message.content == "r!test":

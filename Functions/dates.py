@@ -23,11 +23,7 @@ def printYMD(years, months, days):
         return str(years) + " years, " + str(months) + " months, " + str(days) + " days"
 
 def isTodayHoliday():
-    #get current year
-    year = date.today().year
-    print(year)
-
-    calendar = holidayList(year)
+    calendar = holidayList()
     
     #get today's holiday
     today = calendar.loc[calendar['Date'] == str(date.today())]
@@ -42,7 +38,10 @@ def isTodayHoliday():
                 return holidayInfo[x][1]
     return 'No holidays today!'
        
-def holidayList(year):
+def holidayList():
+    #get current year
+    year = date.today().year
+
     #get US and Mexico holiday list from this year
     holidaysUS = list(holidays.US(years = year, observed = False).items())
     holidaysMX = list(holidays.MX(years = year).items())

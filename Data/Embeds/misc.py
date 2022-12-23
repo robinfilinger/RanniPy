@@ -11,4 +11,4 @@ helpEmbed.add_field(name="Relationship", value="`length` `anniversary` `ranni`",
 helpEmbed.add_field(name="Pokemon", value="`pokeType`", inline=False)
 helpEmbed.add_field(name="Pets", value="`adopt` `petsList` `allPets` editName editFood edit myPets", inline=False)
 helpEmbed.add_field(name="Countdowns", value="`addCountdown` `countdowns` ", inline=False)
-helpEmbed.add_field(name="Holidays", value="`calendar` `today` ", inline=False)
+helpEmbed.add_field(name="Holidays", value="`holidays` `today` ", inline=False)

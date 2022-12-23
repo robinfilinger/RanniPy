@@ -32,7 +32,7 @@ import holidays
 #for x in calendar:
     #print(str(x))
 
-holidayList()
+print(holidayList())
 
 
 

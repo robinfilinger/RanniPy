@@ -48,7 +48,7 @@ def poem(line):
     '''
 
     line10 = '''
-    che nosostros estaremos juntos siempre.
+    que nosostros estaremos juntos siempre.
     that we will be together forever.
     che saremo insieme per sempre.
 
