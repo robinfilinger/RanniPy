@@ -19,22 +19,25 @@ def isValidPetType(type):
     return False
 
 def adopt(args, author):
-    df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    df = pd.read_csv('Data/SaveFiles/Pets.csv')
     df.loc[len(df.index)] = [len(df.index), args[1], args[2].capitalize() + getPetEmoji(args[2]), getCurrentDate(), 0, random.choice(petNatures), getUser(author), 0, 0]
     df.at[len(df.index)-1,"Age"] = dateDiff(MDYtoDMY(df.at[len(df.index)-1, "Birthday"]), MDYtoDMY(getCurrentDate()))
     print(df)
-    df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+    df.to_csv('Data/SaveFiles/Pets.csv', index=False)
     return getUser(author) + " has adopted " + args[1] + getPetEmoji(args[2])
 
 def getTotalPets():
-    df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    df = pd.read_csv('Data/SaveFiles/Pets.csv')
+    print("getTotalPets")
+    print(df)
     for i in range(len(df.index)):
          df.at[i,"Age"] = dateDiff(MDYtoDMY(df.iloc[i]["Birthday"]), MDYtoDMY(getCurrentDate()))
-    df.to_excel('Data/SaveFiles/Pets.xlsx', index=False)
+    df.to_csv('Data/SaveFiles/Pets.csv', index=False)
     return len(df.index)
 
 def getPet(index):
-    df = pd.read_excel('Data/SaveFiles/Pets.xlsx')
+    df = pd.read_csv('Data/SaveFiles/Pets.csv')
+    print(df)
     start = MDYtoDMY(df.iloc[index]["Birthday"])
     end = MDYtoDMY(getCurrentDate())
     petArray = [df.iloc[index]["ID"],
@@ -57,6 +60,7 @@ def getAllPets():
     return petArray
 
 def printAllPets():
+    print("hi")
     output = t2a(
     header=["ID", "Name", "Type", "Birthday", "Age", "Nature", "Owner", "FavFood"],
     body=getAllPets(),
