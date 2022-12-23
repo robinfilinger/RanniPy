@@ -21,18 +21,17 @@ from Data.Arrays.ranniPics import ranniPics
 from Data.Arrays.pokemonTypes import types
 from Data.Arrays.petArrays import petEmojis, petNatures
 from Data.poem import poem
-from Functions.Credentials import loadCreds
-from Functions.countdowns import addCountdown, printAllCountdowns
 
 
 #imported functions
+from Functions.Credentials import loadCreds
+from Functions.countdowns import addCountdown, printAllCountdowns
 from Functions.dates import MDYtoDMY, getCurrentDate, holidayList, isTodayHoliday
 from Functions.getUser import doesUserExist
 from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
-from Functions.pokemon import notValidType, pokedexInfo
-from Functions.pokemon import typeEffectiveness
-from Functions.misc import toTable
+from Functions.pokemon import notValidType, pokedexInfo, typeEffectiveness
+from Functions.misc import toTable, toEmbed
 
 #from test import databaseRead
 from Functions.databases import addRecipe
@@ -131,7 +130,7 @@ async def on_message(message):
 
 
     elif message.content == "r!test":
-        await message.channel.send("https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/bulbasaur.png")
+        await message.channel.send(embed=toEmbed())
         #await message.channel.send(databaseRead())
         #await message.channel.send(addRecipe('Spaghetti with Garlic and Oil'))
     elif message.content == "r!miAmor":
