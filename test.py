@@ -2,6 +2,7 @@ import pandas as pd
 from Functions.countdowns import addCountdown, isCountdownValid, timeUntil, getTotalCountdowns
 import re
 from Functions.dates import holidayList
+from Functions.misc import toTable
 
 from Functions.pets import getPet, getTotalPets
 from Functions.pokemon import pokedexInfo
@@ -32,7 +33,11 @@ import holidays
 #for x in calendar:
     #print(str(x))
 
+header = ["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"]
+body = [[0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich'], [0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich']]
+
 print(holidayList())
+print(toTable(header,body))
 
 
 

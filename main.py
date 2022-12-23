@@ -32,6 +32,7 @@ from Functions.length import dateDiff, length
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
 from Functions.pokemon import notValidType, pokedexInfo
 from Functions.pokemon import typeEffectiveness
+from Functions.misc import toTable
 
 #from test import databaseRead
 from Functions.databases import addRecipe
@@ -64,7 +65,7 @@ async def on_message(message):
     #basic
     elif message.content == "r!hi": #running
         await message.channel.send("❤️Love you Danni❤️")
-    elif message.content.startswith('r!hello'):
+    elif message.content == 'r!hello':
         await message.channel.send('Hello!')
 
     #profile

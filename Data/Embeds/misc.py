@@ -1,4 +1,5 @@
 import discord
+from table2ascii import table2ascii as t2a, PresetStyle
 
 #help
 helpEmbed=discord.Embed(description="Try using some of these commands!", color=0x00ffff)
@@ -11,3 +12,4 @@ helpEmbed.add_field(name="Pokemon", value="`pokeType`", inline=False)
 helpEmbed.add_field(name="Pets", value="`adopt` `petsList` `allPets` editName editFood edit myPets", inline=False)
 helpEmbed.add_field(name="Countdowns", value="`addCountdown` `countdowns` ", inline=False)
 helpEmbed.add_field(name="Holidays", value="`holidays` `today` ", inline=False)
+
