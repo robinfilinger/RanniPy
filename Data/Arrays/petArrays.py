@@ -7,10 +7,10 @@ petEmojis = [
 ["mouse", "🐭"],
 ["horse", "🐴"],
 ["snake", "🐍"],
-["duck", "🦆"],
+["bear", "🧸"],
 ["pig", "🐷"],
 ["cow", "🐮"],
-["sheep", "🐑"],
+["Pokémon", "◓"],
 ]
 
 petNatures = ["Hardy",
