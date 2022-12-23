@@ -29,9 +29,9 @@ from Functions.countdowns import addCountdown, printAllCountdowns
 from Functions.dates import MDYtoDMY, getCurrentDate, holidayList, isTodayHoliday
 from Functions.getUser import doesUserExist
 from Functions.length import dateDiff, length
-from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets
+from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets, toEmbedPets
 from Functions.pokemon import notValidType, pokedexInfo, typeEffectiveness
-from Functions.misc import toTable, toEmbed
+from Functions.misc import toTable
 
 #from test import databaseRead
 from Functions.databases import addRecipe
@@ -130,7 +130,7 @@ async def on_message(message):
 
 
     elif message.content == "r!test":
-        await message.channel.send(embed=toEmbed())
+        await message.channel.send(embed=toEmbedPets())
         #await message.channel.send(databaseRead())
         #await message.channel.send(addRecipe('Spaghetti with Garlic and Oil'))
     elif message.content == "r!miAmor":
