@@ -6,11 +6,11 @@ petEmojis = [
 ["bee", "🐝"],
 ["mouse", "🐭"],
 ["horse", "🐴"],
-["snake", "🐍"],
+["octopus", "🐙"],
 ["bear", "🧸"],
 ["pig", "🐷"],
 ["cow", "🐮"],
-["Pokémon", "◓"],
+["pokemon", "◓"],
 ]
 
 petNatures = ["Hardy",

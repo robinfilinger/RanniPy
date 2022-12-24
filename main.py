@@ -113,7 +113,8 @@ async def on_message(message):
             else:
                 await message.channel.send(adopt(args, message.author.name))      
     elif message.content == "r!allPets":
-        await message.channel.send(f"```\n{printAllPets()}\n```")
+        #await message.channel.send(f"```\n{printAllPets()}\n```")
+        await message.channel.send(embed=toEmbedPets())
 
 #countdowns   
     elif message.content == "r!countdowns":

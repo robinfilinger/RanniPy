@@ -1,5 +1,5 @@
 import pandas as pd
-from Functions.countdowns import addCountdown, isCountdownValid, timeUntil, getTotalCountdowns
+from Functions.countdowns import addCountdown, isCountdownValid, timeUntil, getTotalCountdowns, getAllCountdowns
 import re
 from Functions.dates import holidayList
 from Functions.misc import toTable
@@ -36,7 +36,7 @@ import holidays
 header = ["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"]
 body = [[0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich'], [0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich']]
 
-print(getAllPets())
+print(getAllCountdowns())
 
 
 

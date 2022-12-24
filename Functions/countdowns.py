@@ -16,9 +16,9 @@ def addCountdown(message):
         countdownInfo = replaceTitle(message)
         args = countdownInfo.split(" ")
 
-        df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
+        df = pd.read_csv('Data/SaveFiles/countdowns.csv')
         df.loc[len(df.index)] = [getCountdownTitle(message), args[2], args[3], args[4]]
-        df.to_excel('Data/SaveFiles/countdowns.xlsx', index=False)
+        df.to_csv('Data/SaveFiles/countdowns.csv', index=False)
         return "Countdown *" + getCountdownTitle(message) + "* has been added!"
     else:
         return countdownError()
@@ -67,23 +67,30 @@ def countdownError():
     return '**Please enter countdown and end date in the following format:**\n\nr!addCountdown **"Countdown Name"** YYYY-MM-DD HH:MM AM/PM\n\nExample: r!addCountdown "Reunited" 2023-12-21 12:30 PM' 
 
 def getTotalCountdowns():
-    df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
+    df = pd.read_csv('Data/SaveFiles/countdowns.csv')
     return len(df.index)
 
 def getCountdown(index):
-    df = pd.read_excel('Data/SaveFiles/countdowns.xlsx')
-    countdownArray = [df.iloc[index]["Name"],
+    df = pd.read_csv('Data/SaveFiles/countdowns.csv')
+    countdown = [df.iloc[index]["Name"],
         timeUntil(df.iloc[index]["End Date"], df.iloc[index]["End Time"], df.iloc[index]["Meridem"] ),
         ]
-    return [countdownArray]
+    return [countdown]
 
 def getAllCountdowns():
     countdownArray = []
     for i in range(getTotalCountdowns()):
         countdown = getCountdown(i)
-        print(countdown)
         countdownArray = countdownArray + countdown
+        #countdownArray = countdownSort(countdownArray)
     return countdownArray
+
+def countdownSort(countdowns):
+    df = pd.DataFrame(columns=['Id', 'Name', 'End Date', 'End Time', 'Meridem'])
+    for x in countdowns:
+        if timeUntil(df.iloc[x]["End Date"], df.iloc[x]["End Time"], df.iloc[x]["Meridem"]) > 0:
+            df.concat()
+
 
 def printAllCountdowns():
     output = t2a(

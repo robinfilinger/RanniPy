@@ -73,10 +73,7 @@ def toEmbedPets():
 
     for x in range(len(pets)):
         pet = pets[x]
-        inlineValue = True
-        if x%4 == 0 and x!=0:
-            inlineValue = False
-        tableEmbed.add_field(name=pet[1],value=pet[2] + '\n' + pet[3] + '\n' + pet[4] + '\t\n' + pet[5] + '\n' + pet[6],inline=inlineValue)
+        tableEmbed.add_field(name=pet[1],value=pet[2] + '\n' + pet[3] + '\n' + pet[4] + '\t\n' + pet[5] + '\n' + pet[6],inline=True)
     return tableEmbed
 
 
