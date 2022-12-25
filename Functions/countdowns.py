@@ -84,8 +84,7 @@ def getTotalCountdowns():
 def getCountdown(index):
     df = pd.read_csv('Data/SaveFiles/countdowns.csv')
     countdown = [df.iloc[index]["Name"],
-        timeUntil(df.iloc[index]["End Date"], df.iloc[index]["End Time"], df.iloc[index]["Meridem"] ),
-        ]
+        timeUntil(df.iloc[index]["End Date"], df.iloc[index]["End Time"], df.iloc[index]["Meridem"] )]
     return [countdown]
 
 def getAllCountdowns():
@@ -93,10 +92,10 @@ def getAllCountdowns():
     for i in range(getTotalCountdowns()):
         countdown = getCountdown(i)
         countdownArray = countdownArray + countdown
-        #countdownArray = countdownSort(countdownArray)
+        #countdownArray = sortCountdowns(countdownArray)
     return countdownArray
 
-def countdownSort(countdowns):
+def sortCountdowns(countdowns):
     df = pd.DataFrame(columns=['Id', 'Name', 'End Date', 'End Time', 'Meridem'])
     for x in countdowns:
         if timeUntil(df.iloc[x]["End Date"], df.iloc[x]["End Time"], df.iloc[x]["Meridem"]) > 0:
