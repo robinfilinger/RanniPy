@@ -29,7 +29,9 @@ def isCountdownValid(message):
         return False
 
     countdownInfo = replaceTitle(message)
+    print(countdownInfo)
     args = countdownInfo.split(" ")
+    print(countdownInfo)
 
     if len(args) != 5:
         print("length false")
@@ -47,20 +49,29 @@ def isCountdownValid(message):
 
 #checks to see if there is a string surrounded by quotes
 def isCountdownTitle(message):
-    counter = message.count('"')
+    counter = message.count('"') + message.count('“') + message.count('”')
+    print(counter)
     if counter == 2: 
         if len(getCountdownTitle(message))>0:  
+            print("Countdown Title exists")
             return True
     return False
 
 #returns title between two quotes
 def getCountdownTitle(message):
-    title = re.search('"(.*)"', message)
+    if '"' in message:
+        title = re.search('"(.*)"', message)
+    else:
+        title = re.search('“(.*)”', message)
     return title.group(1)
 
 #replaces title with placeholder
 def replaceTitle(message):
-    return re.sub('".*?"', 'title', message)
+    if '"' in message:
+        return re.sub('".*?"', 'title', message)
+    else:
+        return re.sub('“.*?”', 'title', message)
+    
 
 #returns error message with proper formatting instructions
 def countdownError():

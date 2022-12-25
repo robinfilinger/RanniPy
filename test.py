@@ -1,5 +1,5 @@
 import pandas as pd
-from Functions.countdowns import addCountdown, isCountdownValid, timeUntil, getTotalCountdowns, getAllCountdowns
+from Functions.countdowns import addCountdown, isCountdownValid, isCountdownTitle, timeUntil, getTotalCountdowns, getAllCountdowns
 import re
 from Functions.dates import holidayList
 from Functions.misc import toTable
@@ -33,10 +33,13 @@ import holidays
 #for x in calendar:
     #print(str(x))
 
-header = ["ID", "Name", "Type", "Birthday", "Age", "Nature", "FavFood", "Owner"]
-body = [[0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich'], [0,'Rich', 'a', 'day', 10, 'sweet', 'chocolate', 'Rich']]
 
-print(getAllCountdowns())
+#print(getAllCountdowns())
+
+
+#print(isCountdownTitle('r!addCountdown “RANNI REUNITES” 2022-12-29 10:00 AM'))
+# print('------------------------------------------')
+print(isCountdownValid('r!addCountdown “RANNI REUNITES” 2022-12-29 10:00 AM'))
 
 
 
