@@ -63,7 +63,7 @@ def getCountdownTitle(message):
         title = re.search('"(.*)"', message)
     else:
         title = re.search('“(.*)”', message)
-    return title.group(1)
+    return title.group(1) 
 
 #replaces title with placeholder
 def replaceTitle(message):
