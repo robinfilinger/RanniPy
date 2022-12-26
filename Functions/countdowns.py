@@ -92,14 +92,19 @@ def getAllCountdowns():
     for i in range(getTotalCountdowns()):
         countdown = getCountdown(i)
         countdownArray = countdownArray + countdown
-        #countdownArray = sortCountdowns(countdownArray)
+    #countdownArray = sortCountdowns(countdownArray)
+    print(countdownArray)
     return countdownArray
 
 def sortCountdowns(countdowns):
-    df = pd.DataFrame(columns=['Id', 'Name', 'End Date', 'End Time', 'Meridem'])
+    sortedArray = []
     for x in countdowns:
-        if timeUntil(df.iloc[x]["End Date"], df.iloc[x]["End Time"], df.iloc[x]["Meridem"]) > 0:
-            df.concat()
+        if (x[1][0] == '-' or x[1][0] == '0') == False:
+            sortedArray += x
+    for x in countdowns:
+        if x[1][0] == '-' or x[1][0] == '0':
+            sortedArray += [x[0],'Completed']
+    return [sortedArray]
 
 
 def printAllCountdowns():
@@ -132,11 +137,21 @@ def timeUntil(endDate, endTime, Meridem):
     end_date = datetime.strptime(end[0], "%Y-%m-%d")
     delta = relativedelta.relativedelta(end_date, start_date)
 
+    def returnTime(time):
+        time = str(time).split(':')
+        if time[0]!=0:
+            return time[0] + ' hours'
+        elif time[1]!=0:
+            return time[1] + ' minutes'
+        else:
+            return time[2] + ' seconds'
 
-    if(delta.days<=3):
+    if(delta.days<=3 and delta.months == 0 and delta.years == 0):
         start_time = datetime.strptime(start[1],"%H:%M:%S")
         end_time = datetime.strptime(end[1],"%H:%M:%S")
-        return str(delta.days) 
+        time_left = end_time-start_time
+        time_left = returnTime(time_left)
+        return str(str(delta.days) + ' days, ' + str(time_left)) 
     else:
         return printYMD(delta.years, delta.months, delta.days)
 

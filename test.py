@@ -1,5 +1,5 @@
 import pandas as pd
-from Functions.countdowns import addCountdown, isCountdownValid, isCountdownTitle, timeUntil, getTotalCountdowns, getAllCountdowns
+from Functions.countdowns import addCountdown, isCountdownValid, isCountdownTitle, timeUntil, getTotalCountdowns, getAllCountdowns, printAllCountdowns, getCountdown
 import re
 from Functions.dates import holidayList
 from Functions.misc import toTable
@@ -39,7 +39,11 @@ import holidays
 
 #print(isCountdownTitle('r!addCountdown “RANNI REUNITES” 2022-12-29 10:00 AM'))
 # print('------------------------------------------')
-print(isCountdownValid('r!addCountdown “RANNI REUNITES” 2022-12-29 10:00 AM'))
+# print(addCountdown('r!addCountdown "Ranni January :)" 2023-01-26 07:00 PM'))
+print(printAllCountdowns())
+print(getCountdown(2))
+
+
 
 
 
