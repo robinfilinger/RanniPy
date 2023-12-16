@@ -1,8 +1,12 @@
 import discord
 
+file = discord.File("Multimedia\pictures\profile\Danni.jpg", filename="Danni.jpg")
+
+
 DanniEmbed=discord.Embed(description="Codename: Mallorkus", color=0xffffff)
 DanniEmbed.set_author(name="🤠Danni!🤠")
-DanniEmbed.set_thumbnail(url="https://raw.githubusercontent.com/robinfilinger/Ranni/main/BOT/Profile%20Pics/Danni2.jpg")
+DanniEmbed.set_thumbnail(url="https://raw.githubusercontent.com/robinfilinger/RanniPy/main/Multimedia/pictures/profile/Danni.jpg")
+DanniEmbed.set_image(url="attachment://Danni.jpg")
 DanniEmbed.add_field(name="Name", value="Danniela Ariana Salinas Estrada", inline=False)
 DanniEmbed.add_field(name="Birthday", value="July 27, 2000", inline=False)
 DanniEmbed.add_field(name="Hometown", value="Sandwich, IL", inline=False)
@@ -11,7 +15,7 @@ DanniEmbed.add_field(name="Status", value="All Yours", inline=False)
 
 RiccardoEmbed=discord.Embed(description="Codename: Mallorkus", color=0xffffff)
 RiccardoEmbed.set_author(name="😋Riccardo!😋")
-RiccardoEmbed.set_thumbnail(url="https://raw.githubusercontent.com/robinfilinger/Ranni/main/BOT/Profile%20Pics/Riccardo.jpg")
+RiccardoEmbed.set_thumbnail(url="https://raw.githubusercontent.com/robinfilinger/RanniPy/main/Multimedia/pictures/profile/Riccardo.jpg")
 RiccardoEmbed.add_field(name="Name", value="Richard Joseph Filingeri", inline=False)
 RiccardoEmbed.add_field(name="Birthday", value="August 25, 2000", inline=False)
 RiccardoEmbed.add_field(name="Hometown", value="Rye Brook, NY", inline=False)

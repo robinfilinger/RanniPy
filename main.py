@@ -28,7 +28,7 @@ from Functions.Credentials import loadCreds
 from Functions.countdowns import addCountdown, printAllCountdowns
 from Functions.dates import MDYtoDMY, getCurrentDate, holidayList, isTodayHoliday
 from Functions.getUser import doesUserExist
-from Functions.length import dateDiff, length
+from Functions.length import dateDiff, formatToday
 from Functions.pets import adopt, getAllPets, getPet, getPetEmoji, getTotalPets, isValidPetType, printAllPets, toEmbedPets
 from Functions.pokemon import notValidType, pokedexInfo, typeEffectiveness
 from Functions.misc import toTable
@@ -64,7 +64,7 @@ async def on_message(message):
     #basic
     elif message.content == "r!hi": #running
         await message.channel.send("❤️Love you Danni❤️")
-    elif message.content == 'r!hello':
+    elif message.content == 'r!hello': #running
         await message.channel.send('Hello!')
 
     #profile
@@ -77,7 +77,7 @@ async def on_message(message):
     elif message.content == "r!anniversary": #running
         await message.channel.send("💍Ranni began on 1/10/2022💍")
     elif message.content == "r!length": #running
-        await message.channel.send(length())
+        await message.channel.send(dateDiff('10/01/2022',formatToday()))
     elif message.content == "r!ranni": #running
         await message.channel.send(file=discord.File('Multimedia/pictures/ranniPics/' + random.choice(ranniPics)))
 

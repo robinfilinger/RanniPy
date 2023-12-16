@@ -93,7 +93,6 @@ def getAllCountdowns():
         countdown = getCountdown(i)
         countdownArray = countdownArray + countdown
     #countdownArray = sortCountdowns(countdownArray)
-    print(countdownArray)
     return countdownArray
 
 def sortCountdowns(countdowns):
@@ -108,6 +107,8 @@ def sortCountdowns(countdowns):
 
 
 def printAllCountdowns():
+    print(getAllCountdowns())
+    print('--------------------------')
     output = t2a(
     header=["Title", "Time Remaining"],
     body=getAllCountdowns(),

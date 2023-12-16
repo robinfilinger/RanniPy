@@ -2,6 +2,7 @@ from datetime import date
 import holidays
 import pandas as pd
 from Data.Arrays.holidays import holidayInfo
+from Functions.misc import toTable
 
 
 def getCurrentDate():
@@ -59,7 +60,13 @@ def holidayList():
                                  'Name': ['Ranni Day', 'Danni Day', 'Riccardo Day', 'Dia de Los Muertos', 'Dia de Los Muertos', 'Christmas Eve']})
     calendar = pd.concat([calendar,moreHolidays]).reset_index(drop=True)
     calendar['Date'] = calendar['Date'].astype(str)
+
+    #columns = calendar.columns.values
+    columns = []
+    for col in calendar.columns:
+        columns.append(col)
+    holidaysList = calendar.values.tolist() 
     
-    return calendar
+    return toTable(columns,holidaysList)
 
    

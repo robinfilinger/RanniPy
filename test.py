@@ -40,9 +40,8 @@ import holidays
 #print(isCountdownTitle('r!addCountdown “RANNI REUNITES” 2022-12-29 10:00 AM'))
 # print('------------------------------------------')
 # print(addCountdown('r!addCountdown "Ranni January :)" 2023-01-26 07:00 PM'))
-print(printAllCountdowns())
-print(getCountdown(2))
 
+print(holidayList())
 
 
 
